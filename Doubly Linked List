@@ -1,0 +1,243 @@
+#include<stdio.h>
+#include<stdlib.h>
+void insertion();
+void display();
+void insertAtBegining();
+void insertAtEnd();
+void insertAtmid();
+void deleteFront();
+void deletemid();
+void deleteEnd();
+void count();
+void search();
+
+struct node
+{
+int data;
+struct node *next,*prev;
+}*head=NULL, *temp,*newnode,*nextnode,*tail;
+
+int main()
+{
+    int option;
+    while(1){
+        printf("\n\n***DOUBLY LINKED LIST***\n\n");
+        printf("1.insertion\n");
+        printf("2.display\n");
+        printf("3.insert At Front\n");
+        printf("4.insert At End\n");
+        printf("5.insert At Middle\n");
+        printf("6.delete At Front\n");
+        printf("7.Deletion At End\n");
+        printf("8.Deletion At Middle\n");
+        printf("9.Count the elements\n");
+        printf("10.Search the elements\n");
+        printf("11.Exit\n");
+        printf("Enter your choice (1,2,3,4,5,6,7,8,9,10,11): ");
+        scanf("%d",&option);
+        switch(option)
+        {
+          case 1:{insertion();break;}
+          case 2:{display();break;}
+          case 3:{insertAtBegining();break;}
+          case 4:{insertAtEnd();break;}
+          case 5:{insertAtMid();break;}
+          case 6:{deleteFront();break;}
+          case 7:{deleteEnd();break;}
+          case 8:{deleteMid();break;}
+
+        }
+    }
+
+
+}
+
+void insertion()
+{
+    int choice=1;
+    while(choice)
+    {
+    struct node * newnode;
+    newnode= malloc(sizeof(struct node));
+    printf("Enter the data :");
+    scanf("%d",&newnode->data);
+    newnode->next=NULL;
+    newnode->prev=NULL;
+    if(head==NULL){
+        head = newnode;
+        temp=newnode;
+        tail=newnode;
+    }
+    else{
+        temp->next=newnode;
+        newnode->prev=temp;
+        temp=newnode;
+        tail=newnode;
+    }
+
+    printf("Enter the choice 0 or 1: ");
+    scanf("%d",&choice);
+    }
+    return 0;
+
+}
+
+
+void display()
+    {
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf("%d ",temp->data);
+            temp = temp->next;
+        }
+
+    }
+
+
+void insertAtBegining()
+{
+    int choice=1;
+    while(choice)
+    {
+struct node *newnode;
+  newnode= malloc(sizeof(struct node));
+printf("Enter the data :");
+scanf("%d",&newnode->data);
+newnode->next=NULL;
+newnode->prev=NULL;
+if(head==NULL)
+{
+    head=newnode;
+    temp=newnode;
+    tail=newnode;
+}
+else
+{
+    temp=head;
+    newnode->next=temp;
+    temp->prev=newnode;
+    head=newnode;
+}
+printf("Enter the choice( 0 or 1");
+scanf("%d",&choice);
+}
+}
+
+void insertAtEnd()
+{
+    int choice=1;
+    while(choice)
+    {
+struct node *newnode;
+  newnode= malloc(sizeof(struct node));
+printf("Enter the data :");
+scanf("%d",&newnode->data);
+newnode->next=NULL;
+if(head==NULL)
+{
+    head=newnode;
+    temp=newnode;
+}
+else
+{
+   temp=head;
+   while(temp->next!=NULL)
+   {
+       temp=temp->next;
+   }
+   temp->next=newnode;
+    newnode->prev=temp;
+}
+printf("Enter the choice 0 or 1");
+scanf("%d",&choice);
+}
+}
+
+void insertAtMid()
+{
+    int position;
+printf("Enter the position to insert :");
+scanf("%d",&position);
+    int choice=1;
+    while(choice)
+    {
+struct node *newnode;
+  newnode= malloc(sizeof(struct node));
+printf("Enter the data :");
+scanf("%d",&newnode->data);
+newnode->next=NULL;
+if(head==NULL)
+{
+    head=newnode;
+    temp=newnode;
+}
+else
+{
+   temp=head;
+   for(int i=1;i<position;i++)
+   {
+       temp=temp->next;
+   }
+   temp->prev->next=newnode;
+   newnode->prev=temp->prev;
+   newnode->next=temp;
+   temp->prev=newnode;
+}
+printf("Enter the choice 0 or 1");
+scanf("%d",&choice);
+}
+}
+
+void deleteFront()
+{
+    temp=head;
+    head=temp->next;
+    free(temp);
+}
+
+void deleteEnd()
+{
+   temp=head;
+
+        if(temp->next==NULL){
+            temp=NULL;
+        }
+
+        else
+        {
+                 while(temp->next!=NULL)
+            {
+                temp=temp->next;
+            }
+
+        temp->prev->next=NULL;
+        free(temp);
+    }
+  }
+
+  void deleteMid()
+{
+    int position;
+printf("Enter the position to delete :");
+scanf("%d",&position);
+
+if(head==NULL)
+{
+  head=NULL;
+}
+else
+{
+   temp=head;
+   for(int i=1;i<position;i++)
+   {
+       temp=temp->next;
+   }
+   temp->prev->next=temp->next;
+   temp->next->prev=temp->prev;
+   free(temp);
+
+}
+}
+
+
