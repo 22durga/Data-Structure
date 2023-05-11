@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*head,*temp,*newnode,*tail,*t1;
+int main()
+{
+    int n,i,r;
+     printf("Enter the size \n");
+        scanf("%d", &n);
+                printf("enter the data\n");
+     for (i = 0; i < n;i++) 
+{
+    newnode=malloc(sizeof(struct node));
+       scanf("%d",&newnode->data);
+    if(head==0)
+   tail= head=newnode;
+   else
+   {
+       tail->next=newnode;
+       tail=newnode;
+   }
+    
+}
+
+printf("enter the no of rotation: ");
+scanf("%d",&r);
+for(i=1;i<=r;i++)
+{
+    temp=head;
+    head=head->next;
+    tail->next=temp;
+    tail=temp;
+    tail->next=0;
+}
+
+
+
+
+temp=head;
+while(temp!=0)
+{printf("%d ",temp->data);
+  temp=temp->next;  
+}
+    return 0;
+}
